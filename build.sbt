@@ -13,4 +13,4 @@ libraryDependencies ++= Seq(
   "org.slf4j" % "slf4j-simple" % "1.7.25"
   )
 
-mainClass in assembly := Some("org.jetprobe.genfast.cli.GenFastCLI")
+mainClass in assembly := Some("com.jetprobe.fastgen.cli.GenFastCLI")

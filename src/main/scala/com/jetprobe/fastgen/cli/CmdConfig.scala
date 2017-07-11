@@ -11,7 +11,7 @@ case class CmdConfig(out: File = new File("."), records: Int = 1, datasetConfig:
 
 object CmdParser {
   val parser = new scopt.OptionParser[CmdConfig]("GenFast") {
-    head("FastGen", "0.1.0")
+    head("fastgen", "0.1.0")
 
     //Option for getting the template as a sample format. Currently only supports json
     opt[File]("template").required().valueName("<json-template>").
