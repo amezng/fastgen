@@ -10,7 +10,7 @@ import com.typesafe.config.{Config, ConfigFactory}
 case class CmdConfig(out: File = new File("."), records: Int = 1, datasetConfig: Option[Config] = None, jsonTemplate: File = new File("template.json"))
 
 object CmdParser {
-  val parser = new scopt.OptionParser[CmdConfig]("GenFast") {
+  val parser = new scopt.OptionParser[CmdConfig]("fastgen") {
     head("fastgen", "0.1.0")
 
     //Option for getting the template as a sample format. Currently only supports json
