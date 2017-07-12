@@ -1,5 +1,6 @@
 package com.jetprobe.fastgen.common
 
+import com.jetprobe.fastgen.generators.{FieldOption, Generator}
 import com.typesafe.config.ConfigFactory
 
 /**
@@ -19,7 +20,12 @@ object GlobalConfig {
  // val defLastName = config.getString("dataset.Person.Name")
 
 
-
+  def getRandomString(dataset : Map[String,Array[String]], fieldOpt : FieldOption): String ={
+    dataset.get(fieldOpt.getName) match {
+      case Some(arr) => Generator.getRNG(arr.length, arr)
+      case None => fieldOpt.getName
+    }
+  }
 
 
 }

@@ -1,6 +1,5 @@
 package com.jetprobe.fastgen.generators
 
-import scala.collection.mutable.ArrayBuffer
 import scala.util.Random
 
 /**
@@ -15,6 +14,6 @@ object Generator {
   }
 
 
-  }
+}
 
 

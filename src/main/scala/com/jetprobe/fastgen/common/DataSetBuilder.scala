@@ -1,11 +1,11 @@
 package com.jetprobe.fastgen.common
 
-import com.jetprobe.fastgen.generators.{EntityGenerator}
+import com.jetprobe.fastgen.generators.EntityGenerator
 import com.typesafe.config.Config
 
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 import GlobalConfig._
-import com.jetprobe.fastgen.generators.entity.PersonGen
+import com.jetprobe.fastgen.generators.entity.{Contact, Location, PersonGen}
 
 /**
   * @author Shad.
@@ -45,6 +45,9 @@ object BuilderInstance {
         case None => GlobalConfig.config
       }
       generators += PersonGen(mergedConfig,regexMatches)
+      generators += Location(mergedConfig,regexMatches)
+      generators += Contact(mergedConfig,regexMatches)
+
       this
     }
 
