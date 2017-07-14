@@ -14,9 +14,10 @@ A detailed documentation can be found in the [wiki](https://github.com/amezng/fa
 Check out the [releases page](https://github.com/amezng/fastgen/releases)
 
 ### What's coming up 
--[x] Support for Location and Random String
--[ ] Support for custom options based on regex for generating strings like ${Person.firstName[^'Sha']}
--[ ] Support for Mongo DB as the output destination
--[ ] Support for Kafka as the output destination
--[ ] Support for RabbitMQ as the output  destination
--[ ] Support for batch based ingestion, with configurable batch size and interval.
+
+- [x] Support for Location and Random String
+- [ ] Support for custom options based on regex for generating strings like ${Person.firstName[^'Sha']}
+- [ ] Support for Mongo DB as the output destination
+- [ ] Support for Kafka as the output destination
+- [ ] Support for RabbitMQ as the output  destination
+- [ ] Support for batch based ingestion, with configurable batch size and interval.
