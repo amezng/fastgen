@@ -1,9 +1,8 @@
 name := "fastgen"
 
-version := "0.2.0"
+version := "0.2.1"
 
 scalaVersion := "2.11.8"
-
 
 libraryDependencies ++= Seq(
   "com.typesafe" % "config" % "1.3.1",
@@ -11,8 +10,6 @@ libraryDependencies ++= Seq(
   "com.typesafe.scala-logging" %% "scala-logging" % "3.7.1",
   "org.slf4j" % "slf4j-simple" % "1.7.25",
   "org.scalatest" %% "scalatest" % "3.0.1" % "test"
-  )
+)
 
 mainClass in assembly := Some("com.jetprobe.fastgen.cli.FastGenCLI")
-
-

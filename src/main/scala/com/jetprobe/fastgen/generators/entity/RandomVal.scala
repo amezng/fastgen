@@ -1,8 +1,7 @@
 package com.jetprobe.fastgen.generators.entity
 
-import com.jetprobe.fastgen.common.GlobalConfig
-import com.jetprobe.fastgen.common.GlobalConfig.getRandomString
-import com.jetprobe.fastgen.generators.RandomString.rnd
+import java.security.SecureRandom
+
 import com.jetprobe.fastgen.generators.{
   EntityGenerator,
   FieldOption,
@@ -19,9 +18,9 @@ class RandomVal(datasetConfig: Config, regexMatcher: Regex.MatchIterator)
     extends EntityGenerator(datasetConfig, regexMatcher)
 
 object RandomVal {
-  import GlobalConfig.getRandomString
   val abc = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
   val numberStr = "0123456789"
+  lazy val rnd = new SecureRandom()
 
   def apply(datasetConfig: Config,
             regexMatcher: Regex.MatchIterator): RandomVal = {
