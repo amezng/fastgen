@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory
 /**
   * @author Shad.
   */
-object FastGenCLI extends App with LazyLogging{
+object FastGenCLI extends App with LazyLogging {
 
   import com.jetprobe.fastgen.common.BuilderInstance.builder
 
@@ -21,15 +21,15 @@ object FastGenCLI extends App with LazyLogging{
         .configure(config.datasetConfig, FileReader.readFile(template))
         .generate(recCount)
 
-      logger.info(s"Time taken to generate:  ${(System.nanoTime() - t0)/1000000f} ms")
+      logger.info(
+        s"Time taken to generate:  ${(System.nanoTime() - t0) / 1000000f} ms")
       val fw = FileWriter(dataset.toArray)
       fw.writeTo(output) match {
         case Some(path) => logger.info(s"Dataset generated at ${path}")
-        case None => logger.error(s"Failed to generate the dataset")
+        case None       => logger.error(s"Failed to generate the dataset")
       }
 
-
-      logger.debug(s"Elapsed time:  ${(System.nanoTime() - t0)/1000000f} ms")
+      logger.debug(s"Elapsed time:  ${(System.nanoTime() - t0) / 1000000f} ms")
 
     }
     case None => logger.warn("Config not found.")

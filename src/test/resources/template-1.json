@@ -1,0 +1,5 @@
+{
+  "uid" : "${Random.UUID}",
+  "name" : "${Person.firstName}",
+  "age" : "${Person.age}"
+}

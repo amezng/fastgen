@@ -13,19 +13,12 @@ object GlobalConfig {
   val startPattern = "${"
   val endPattern = "}"
 
-  //val personFirstNames = config.getString("default.dataset.person.firstName")
-  //val personLastNames =  config.getString("default.dataset.person.surnames")
-
- // val defFirstName = config.getString("dataset.Person.firstName")
- // val defLastName = config.getString("dataset.Person.Name")
-
-
-  def getRandomString(dataset : Map[String,Array[String]], fieldOpt : FieldOption): String ={
+  def getRandomString(dataset: Map[String, Array[String]],
+                      fieldOpt: FieldOption): String = {
     dataset.get(fieldOpt.getName) match {
       case Some(arr) => Generator.getRNG(arr.length, arr)
-      case None => fieldOpt.getName
+      case None      => fieldOpt.getName
     }
   }
-
 
 }

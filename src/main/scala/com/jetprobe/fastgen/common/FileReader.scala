@@ -19,7 +19,7 @@ object FileReader {
   def getDataSet(filePath: String): Array[String] = {
     val dataset = new ArrayBuffer[String]()
     val fileResource = getClass.getResource("/" + filePath)
-    val bufferedSource = if(fileResource!=null){
+    val bufferedSource = if (fileResource != null) {
       val stream = getClass.getResourceAsStream("/" + filePath)
       Source.fromInputStream(stream)
     } else
@@ -29,22 +29,6 @@ object FileReader {
       dataset += data
     }
     bufferedSource.close
-    dataset.toArray
-  }
-
-  /**
-    * Fetch external dataset based on the file path
-    *
-    * @param path
-    * @return
-    */
-  def getExternalDataset(path: String): Array[String] = {
-    val dataset = new ArrayBuffer[String]()
-    val bs = Source.fromFile(new File(path))
-    for (data <- bs.getLines) {
-      dataset += data
-    }
-    bs.close
     dataset.toArray
   }
 

@@ -5,25 +5,34 @@ import com.typesafe.config.Config
 
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 import GlobalConfig._
-import com.jetprobe.fastgen.generators.entity.{Contact, Location, PersonGen}
+import com.jetprobe.fastgen.generators.entity.{
+  Contact,
+  Location,
+  PersonGen,
+  RandomVal
+}
 
 /**
   * @author Shad.
   */
-abstract class DatasetBuilder{
+abstract class DatasetBuilder {
   val generators = new ListBuffer[EntityGenerator]
 
-  var templateStr : String
+  var templateStr: String
 
-  def configure(config : Option[Config], template : String) : DatasetBuilder
+  def configure(config: Option[Config], template: String): DatasetBuilder
 
-  def generate() : String = generators.foldLeft(templateStr){
-    case (template,generator) => generator.transform(template) + "\n"
+  private def minify(s: String): String = {
+    s.replaceAll("\\s", "").split('\n').map(_.trim.filter(_ >= ' ')).mkString
   }
 
-  def generate(count : Int) : ArrayBuffer[String] = {
+  def generate(): String = generators.foldLeft(templateStr) {
+    case (template, generator) => minify(generator.transform(template)) + "\n"
+  }
+
+  def generate(count: Int): ArrayBuffer[String] = {
     val dataset = new ArrayBuffer[String]()
-    for(i <- 1 to count){
+    for (i <- 1 to count) {
       dataset += generate()
     }
     dataset
@@ -31,22 +40,22 @@ abstract class DatasetBuilder{
 
 }
 
-
-
 object BuilderInstance {
 
   val builder = new DatasetBuilder {
 
-    override def configure(config: Option[Config], template: String): DatasetBuilder = {
+    override def configure(config: Option[Config],
+                           template: String): DatasetBuilder = {
       templateStr = template
       val regexMatches = gen findAllIn (templateStr)
       val mergedConfig = config match {
         case Some(config) => config.withFallback(GlobalConfig.config)
-        case None => GlobalConfig.config
+        case None         => GlobalConfig.config
       }
-      generators += PersonGen(mergedConfig,regexMatches)
-      generators += Location(mergedConfig,regexMatches)
-      generators += Contact(mergedConfig,regexMatches)
+      generators += PersonGen(mergedConfig, regexMatches)
+      generators += Location(mergedConfig, regexMatches)
+      generators += Contact(mergedConfig, regexMatches)
+      generators += RandomVal(mergedConfig, regexMatches)
 
       this
     }
