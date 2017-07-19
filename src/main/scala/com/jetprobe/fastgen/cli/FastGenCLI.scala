@@ -1,8 +1,11 @@
 package com.jetprobe.fastgen.cli
 
 import com.jetprobe.fastgen.common.{FileReader, FileWriter}
+import com.jetprobe.fastgen.io.{DataSink, DataSinkBuilder}
 import com.typesafe.scalalogging.{LazyLogging, Logger}
 import org.slf4j.LoggerFactory
+
+import scala.collection.mutable.ArrayBuffer
 
 /**
   * @author Shad.
@@ -19,18 +22,12 @@ object FastGenCLI extends App with LazyLogging {
       val t0 = System.nanoTime()
       val dataset = builder
         .configure(config.datasetConfig, FileReader.readFile(template))
-        .generate(recCount)
+        .generate(recCount) { data =>
+          DataSinkBuilder(output).write(data)
+        }
 
       logger.info(
         s"Time taken to generate:  ${(System.nanoTime() - t0) / 1000000f} ms")
-      val fw = FileWriter(dataset.toArray)
-      fw.writeTo(output) match {
-        case Some(path) => logger.info(s"Dataset generated at ${path}")
-        case None       => logger.error(s"Failed to generate the dataset")
-      }
-
-      logger.debug(s"Elapsed time:  ${(System.nanoTime() - t0) / 1000000f} ms")
-
     }
     case None => logger.warn("Config not found.")
   }

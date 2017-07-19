@@ -26,16 +26,15 @@ abstract class DatasetBuilder {
     s.replaceAll("\\s", "").split('\n').map(_.trim.filter(_ >= ' ')).mkString
   }
 
-  def generate(): String = generators.foldLeft(templateStr) {
-    case (template, generator) => minify(generator.transform(template)) + "\n"
+  def generate(template: String): String = generators.foldLeft(template) {
+    case (str, generator) => generator.transform(str)
   }
 
-  def generate(count: Int): ArrayBuffer[String] = {
-    val dataset = new ArrayBuffer[String]()
-    for (i <- 1 to count) {
-      dataset += generate()
-    }
-    dataset
+  def generate(count: Int)(implicit writer: Array[String] => Unit): Unit = {
+    val str = minify(templateStr)
+    val dataset = Array.fill[String](count)(str).par
+
+    writer(dataset.map(generate(_) + "\n").toArray)
   }
 
 }
@@ -47,7 +46,7 @@ object BuilderInstance {
     override def configure(config: Option[Config],
                            template: String): DatasetBuilder = {
       templateStr = template
-      val regexMatches = gen findAllIn (templateStr)
+      val regexMatches = gen findAllIn templateStr
       val mergedConfig = config match {
         case Some(config) => config.withFallback(GlobalConfig.config)
         case None         => GlobalConfig.config

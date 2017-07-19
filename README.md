@@ -1,4 +1,4 @@
-# fastgen [![Build Status](https://travis-ci.org/amezng/fastgen.svg?branch=master)](https://travis-ci.org/amezng/fastgen)
+# fastgen [![Build Status](https://travis-ci.org/amezng/fastgen.svg?branch=master)](https://travis-ci.org/amezng/fastgen) [![Coverage Status](https://coveralls.io/repos/github/amezng/fastgen/badge.svg?branch=master)](https://coveralls.io/github/amezng/fastgen?branch=master)
 A tool for generating random data
 
 ### How to build ?
@@ -16,8 +16,11 @@ Check out the [releases page](https://github.com/amezng/fastgen/releases)
 ### What's coming up 
 
 - [x] Support for Location and Random String
-- [ ] Support for custom options based on regex for generating strings like ${Person.firstName[^'Sha']}
+- [x] Support for RabbitMQ as the output destination
+- [x] Support for Kafka as the output destination
 - [ ] Support for Mongo DB as the output destination
-- [ ] Support for Kafka as the output destination
-- [ ] Support for RabbitMQ as the output  destination
+- [ ] Support for custom options based on regex for generating strings like ${Person.firstName[^'Sha']}
+
+
+
 - [ ] Support for batch based ingestion, with configurable batch size and interval.
